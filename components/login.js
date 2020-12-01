@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TextInput, Button, Alert } from 'react-native';
+import store from '../redux/store'
 
 
 export default function Login(){
@@ -24,6 +25,7 @@ export default function Login(){
         .then(resp => resp.json())
         .then(resp => {
             if (resp.user){
+                store.dispatch({type: "LOG_USER_IN", currentUser: resp.user})
                 console.log(resp.user)
             } else {
                 Alert.alert(resp.message)
